@@ -27,7 +27,6 @@ export async function createEditCabin(newCabin, id) {
     query = query.insert([{ ...newCabin, image: imagePath }]);
   }
   // B. Edit
-  console.log(newCabin)
   if (id) {
     query = query.update({ ...newCabin, image: imagePath })
       .eq("id", id)
