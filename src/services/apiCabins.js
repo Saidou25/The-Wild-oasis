@@ -9,12 +9,13 @@ export default async function getCabins() {
   return data;
 }
 export async function createCabin(newCabin) {
-  const imageName = `${Math.random()}-${
-    newCabin.image.name.replaceAll("/", "")
-  }`;
+  const imageName = `${Math.random()}-${newCabin.image.name}`.replaceAll(
+    "/",
+    ""
+  );
   // https://lcjxklbudxrgalpnicrt.supabase.co/storage/v1/object/public/cabin-images/cabin-001.jpg?t=2024-02-08T14%3A01%3A45.118Z
   // 1.Create cabin
-  const imagePath = `${supabaseUrl}/storage/v1/object/public/cabin-images/cabin-001.jpg?t=2024-02-08T14%3A01%3A45.118Z/${imageName}`;
+  const imagePath = `${supabaseUrl}/storage/v1/object/public/cabin-images/${imageName}`;
 
   const { data, error } = await supabase
     .from("cabins")
@@ -26,7 +27,7 @@ export async function createCabin(newCabin) {
   }
   // 2.If no error upload image
   const { error: storageError } = await supabase.storage
-    .from("avatars")
+    .from("cabin-images")
     .upload(imageName, newCabin.image);
 
   // 3. Delete the cabin if there was an error uploading image

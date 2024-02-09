@@ -23,15 +23,14 @@ function CreateCabinForm() {
       reset();
     },
     onError: (err) => toast.error(err.message),
-  });
+  }); 
 
   function onError(errors) {
     console.log(errors);
   }
 
   function onSubmit(data) {
-    mutate({ ...data, image: data.image[0] });
-    console.log(data)
+    mutate({ ...data, image: data.image[0] }); 
   }
   return (
     <Form onSubmit={handleSubmit(onSubmit, onError)}>
